@@ -13,10 +13,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-    @quote = current_user.quotes.build
-    #@quotes = @user.quotes.paginate(page: params[:page])
-    @feed_items = @user.quotes.paginate(page: params[:page])
-    
+    logger.debug "#{session[:history]}"  
   end
 
   # GET /users/new

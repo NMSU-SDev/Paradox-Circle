@@ -5,7 +5,7 @@ class TagsController < ApplicationController
 		@tag = Tag.new(tag_params)
 		@tag.save!
 		#logger.debug "params: #{params.inspect}"
-		#artist id only available to tags controller after submit is clicked.
+
 		artist = Artist.find_by(id: params[:tag][:artistId])
 		artist.tags << @tag
 		artist.save!

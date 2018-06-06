@@ -8,47 +8,24 @@
       </h1>
     </section>
   </aside>
-   <div class="col-md-8">
-      <h3>Quote Feed</h3>
-      <%= render 'shared/feed' %>
-    </div>
-    <% if logged_in? %>
-      <div class="row">
-        <aside class="col-md-4">
-          <section class="user_info">
-            <%= render 'shared/user_info' %>
-          </section>
-          <section class="quote_form">
-            <%= render 'shared/quote_form' %>
-          </section>
-        </aside>
-      <% end %>
-      </div>
-	  <p> </p>
-	  <p> </p>
-      <iframe src="https://calendar.google.com/calendar/embed?title=Upcoming%20events&amp;showTabs=0&amp;height=400&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=9siib7kvnmu8vdoh6eqnmk6nn4%40group.calendar.google.com&amp;color=%238C500B&amp;ctz=America%2FDenver" 
-	  style="border-width:0" width="600" height="400" frameborder="0" scrolling="no"></iframe>
-	<p> </p>
-	<div>
+	<section>
     <h3> Last viewed artists </h3>
-      <!-- get the last 5 records in the artists table and display them -->
-      <!-- to make this actually display last 5 visited pages, we need some logic to keep track of them -->
-      <% @artiststodisplay = Artist.last(5) %>
-        <% @artiststodisplay.each do |artist| %>
-          <p><%= link_to artist.name, url_for(artist) %></p>
-        <% end %>
+      
+      <% session[:history].each do |a| %>
+        <% artistID = a.split('/')[-1] %>
+        <% artistRecord = Artist.find(artistID) %>
+        <p><%= link_to artistRecord.name, a %></p>
+      <% end %>
+  </section>
 
-	</div>
-
-	<div>
+	<section>
   	<h3> Recommended for you </h3>
   	<h5> Artists you may be interested in based on recently viewed artists</h5>
+      <!-- placeholder content until implementing recommendations -->
       <% @artiststodisplay = Artist.first(5) %>
       <% @artiststodisplay.each do |artist| %>
         <p><%= link_to artist.name, url_for(artist) %></p>
       <% end %>
-  </div>
-	
-<%= social_share_button_tag %>
+  </section>
 
 
