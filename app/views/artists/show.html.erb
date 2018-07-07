@@ -10,7 +10,8 @@
 </div>
 <div class="pull-right">
 	<h3>Tags added to <%=@artist.name%>:</h3>
-	<% tags = @artist.tags.pluck(:name).flatten %>
+	<% tags = @artist.tags.order('artist_tags.tag_count desc').limit(4).pluck(:name).flatten %>
+
   <p>Popular tags added to this artist (click to add):</p>
   <% tags.each do |t| %>
     <!-- the following line passes the current artist id and the tag being clicked on's id to the tag controller to increment count -->
